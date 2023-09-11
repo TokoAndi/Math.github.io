@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kalkulator Pembagian</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
+
+    <script>
+      let isAirplay = true;
+
+      function toggleIcon() {
+        const iconElement = document.getElementById("iconButton");
+        if (isAirplay) {
+          iconElement.innerHTML = feather.icons.smartphone.toSvg();
+        } else {
+          iconElement.innerHTML = feather.icons.airplay.toSvg();
+        }
+        isAirplay = !isAirplay;
+      }
+
+      feather.replace();
+      function hitungPembagian() {
+        var input = document.getElementById("input").value;
+        var numbers = input.split(" ÷ ");
+
+        var dividend = parseFloat(numbers[0]);
+        var divisor = parseFloat(numbers[1]);
+
+        var quotient = dividend / divisor;
+
+        document.getElementById("result").textContent = "Hasil: " + quotient;
+        document.getElementById("copyButton").style.display = "block";
+        document.getElementById("clearButton").style.display = "block";
+        document.getElementById("pasteButton").style.display = "none";
+      }
+
+      function salinHasil() {
+        var hasil = document
+          .getElementById("result")
+          .textContent.split(": ")[1];
+        var tempInput = document.createElement("input");
+        document.body.appendChild(tempInput);
+        tempInput.value = hasil;
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+        document.getElementById("pasteButton").style.display = "block";
+      }
+
+      function hapusInput() {
+        document.getElementById("input").value = "";
+        document.getElementById("result").textContent = "";
+        document.getElementById("copyButton").style.display = "none";
+        document.getElementById("clearButton").style.display = "none";
+        document.getElementById("pasteButton").style.display = "block";
+      }
+
+      function tempelTeks() {
+        navigator.clipboard
+          .readText()
+          .then(function (clipboardText) {
+            // Mencari teks di antara simbol *
+            var matches = clipboardText.match(/\*([^*]+)\*/);
+
+            if (matches && matches.length > 1) {
+              var extractedText = matches[1];
+              document.getElementById("input").value = extractedText;
+            } else {
+              // Jika tidak ada teks di antara simbol *, maka tidak ada yang dimasukkan
+              console.log(
+                "Tidak ada teks yang dapat diekstrak dari clipboard."
+              );
+            }
+          })
+          .catch(function (err) {
+            console.error("Gagal membaca clipboard: ", err);
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <container id="math">
+      <button id="iconButton" onclick="toggleIcon()">
+        <script>
+          document.write(feather.icons.airplay.toSvg());
+        </script>
+      </button>
+      <h1>Kalkulator Pembagian</h1>
+      <input
+        type="text"
+        id="input"
+        placeholder="Masukkan pembagian seperti -73146962748406770 ÷ 338"
+      />
+      <button onclick="hitungPembagian()">Hitung</button>
+      <div id="result"></div>
+      <button id="copyButton" style="display: none" onclick="salinHasil()">
+        Salin Hasil
+      </button>
+      <button id="clearButton" style="display: none" onclick="hapusInput()">
+        Hapus
+      </button>
+      <button id="pasteButton" style="display: none" onclick="tempelTeks()">
+        Tempel
+      </button>
+    </container>
+  </body>
+</html>

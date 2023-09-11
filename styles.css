@@ -1,0 +1,58 @@
+/* styles.css */
+/* Gaya untuk tombol */
+#math {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  height: 100vh;
+  text-align: center;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Gaya hover untuk tombol */
+button:hover {
+  background-color: #45a049;
+}
+
+/* Gaya untuk input teks */
+input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+/* Gaya untuk teks hasil */
+#result {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+/* Gaya untuk tombol "Salin Hasil" dan "Hapus" */
+#copyButton,
+#clearButton {
+  display: none;
+  background-color: #f44336;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Gaya hover untuk tombol "Salin Hasil" dan "Hapus" */
+#copyButton:hover,
+#clearButton:hover {
+  background-color: #d32f2f;
+}
